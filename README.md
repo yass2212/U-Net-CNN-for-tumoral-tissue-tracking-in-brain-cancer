@@ -1,8 +1,10 @@
-# Brain Tumor Segmentation — 3D U-Net on BraTS2020
+# Brain Tumor Segmentation U-Net on BraTS2020
 
-A 3D deep learning pipeline for multi-class brain tumor segmentation using the BraTS2020 dataset.
-The model is a 3D U-Net that segments three tumor sub-regions simultaneously from four-modality MRI volumes.
+A deep learning pipeline for multi-class brain tumor segmentation using the BraTS2020 dataset.
+The model is a U-Net that segments three tumor sub-regions simultaneously from four-modality MRI volumes.
 
+---
+It will be use for future 3D reconstruction
 ---
 
 ## Table of Contents
@@ -99,13 +101,13 @@ normalized[~brain_mask] = 0.0
 - Edema weight: 1.0 (large, easier to detect)
 - Enhancing tumor weight: 2.0 (tiny, clinically critical)
 
-**Focal BCE** (γ=2) — focuses gradient on hard, ambiguous voxels near tumor boundaries.
+**Focal BCE** (γ=2) : focuses gradient on hard, ambiguous voxels near tumor boundaries.
 
 Combined loss: `0.5 × WeightedDice + 0.5 × FocalBCE`
 
 ### Gradient Accumulation
 `ACCUM_STEPS=2` with `BATCH_SIZE=2` gives an **effective batch size of 4**
-without additional VRAM cost — the gradients from 2 forward passes are summed before
+without additional VRAM cost : the gradients from 2 forward passes are summed before
 each optimizer step.
 
 ### LR Schedule: Warmup + Cosine Annealing
