@@ -30,16 +30,16 @@ It will be use for future 3D reconstruction
 - **3 binary segmentation masks** per slice:
   - Class 0: Necrotic core / non-enhancing tumor (~3% of brain voxels)
   - Class 1: Peritumoral edema (~15% of brain voxels)
-  - Class 2: Enhancing tumor — gadolinium uptake on T1ce (~1% of brain voxels)
+  - Class 2: Enhancing tumor (with gadolinium uptake on T1ce (~1% of brain voxels)).
 - Raw data format: `volume_{id}_slice_{s}.h5` with `image (240, 240, 4)` and `mask (240, 240, 3)`
 
 The dataset can be downloaded via [Kaggle](https://www.kaggle.com/datasets/awsaf49/brats2020-training-data).
-
+This is a public dataset. 
 ---
 
 ## Model Architecture
 
-**3D U-Net** — the standard architecture for volumetric medical image segmentation.
+The standard architecture for volumetric medical image segmentation of U-Net :
 
 ```
 Input  : (B, 4, D, H, W)        four MRI modalities as input channels
@@ -76,7 +76,7 @@ sample independently, keeping training stable even with `batch_size=1`.
 ## Key Design Choices
 
 ### Patch-based Training
-Full BraTS volumes are `(4, 155, 240, 240)` — too large for GPU memory in one pass.
+Full BraTS volumes are `(4, 155, 240, 240)` too large for GPU memory in one pass and can be an big issue.
 Training uses random patches of size `(64, 160, 160)` extracted on-the-fly.
 
 **Tumor-centered sampling (60%):** 60% of patches are centered on a random tumor voxel.
@@ -269,3 +269,5 @@ Training curves are saved to `training_curves.png` after training completes.
 
 Python 3.10+ and CUDA 11.x+ recommended for GPU training.
 The code falls back to CPU automatically if no GPU is detected.
+
+Personnal project that represents the second step to 3D reconstruction with 3D detection of cancer.
