@@ -1,5 +1,7 @@
 # Brain Tumor Segmentation U-Net on BraTS2020
 
+Next work to do is to merge and optimize the previous project of 3D reconstruction with this CNN and brain segmentation (skull-stripping). The goal is to create a complete pipeline from MRI images to 3D reconstruction : IN PROGRESS
+
 A deep learning pipeline for multi-class brain tumor segmentation using the BraTS2020 dataset.
 The model is a U-Net that segments three tumor sub-regions simultaneously from four-modality MRI volumes.
 
